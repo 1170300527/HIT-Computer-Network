@@ -41,10 +41,10 @@ public class SocketThread extends Thread {
       if (head.contains("google") || head.contains("microsoft")) {
         return;
       }
-//    String inetAdress = incomingSocket.getInetAddress().toString();
-//    if (inetAdress.equals("/127.0.0.1")) {
-//      return;
-//    }
+//      String inetAdress = socket.getInetAddress().toString();
+//      if (inetAdress.equals("/127.0.0.1")) {
+//        return;
+//      }
       if (host.equals("jwes.hit.edu.cn")) {
         return;
       }
@@ -62,7 +62,7 @@ public class SocketThread extends Thread {
       proxySocket = new Socket(host, port);
       InputStream proxyInput = proxySocket.getInputStream();
       OutputStream proxyOutput = proxySocket.getOutputStream();
-      if ("CONNECT".equalsIgnoreCase(type)) {// https先建立隧道
+      if ("CONNECT".equalsIgnoreCase(type)) {
         port = 443;
         outputClient.write("HTTP/1.1 200 Connection Established\r\n\r\n".getBytes());
         outputClient.flush();
@@ -97,6 +97,7 @@ public class SocketThread extends Thread {
                 System.out.println("缓存长度：" + oldCache.length);
                 outputClient.write(oldCache);
                 outputClient.flush();
+                return;
               }
             }
             String[] tmpStrings = hdString.split("\r\n");
