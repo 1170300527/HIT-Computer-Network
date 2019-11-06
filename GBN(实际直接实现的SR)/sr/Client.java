@@ -30,17 +30,4 @@ public class Client {
         System.out.println("send succeed");
         recvByteMethod(fileOutputStream, socket);
     }
-
-    static void recvByteMethod(FileOutputStream fileOutputStream, DatagramSocket socket) throws IOException {
-        byte[] recvBytes;
-        while (true) { //使其一直处于接收状态
-            recvBytes = receive(socket);
-            if (recvBytes.length != 0) {
-                System.out.println(recvBytes.length);
-                fileOutputStream.write(recvBytes);
-                break;
-            }
-        }
-        System.out.println("receive succeed");
-    }
 }

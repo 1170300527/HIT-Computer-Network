@@ -18,11 +18,10 @@ public class Server {
         System.out.println("receive clientSend file as serverRecv");
         DatagramSocket socket = new DatagramSocket(port);
         socket.setSoTimeout(1000);
-        Client.recvByteMethod(fileOutputStream, socket);
+        recvByteMethod(fileOutputStream, socket);
         byte[] sendBytes = getByteArray(sendFile).toByteArray();
         System.out.println("send server send file");
         send(socket, sendBytes);
         System.out.println("send succeed");
     }
-
 }

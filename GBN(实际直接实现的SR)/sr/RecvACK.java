@@ -20,7 +20,7 @@ public class RecvACK extends Thread {
     public void run() {
         int end = 1;
         while (true) {
-            //当收到中止，并且没有等待接收ack的缓存时停止（偶尔能用，按序接到最后一个但此时map.size不是0，之后就阻塞了）找了半天原因
+            //当收到中止，并且没有等待接收ack的缓存时停止（按序接到最后一个但此时map.size不是0，之后就阻塞了）找了半天原因
             if (end == 0 && ackMap.size() == 0)
                 break;
             byte[] ackByte = new byte[2];

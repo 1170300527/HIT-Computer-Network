@@ -1,9 +1,6 @@
 package sr;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -155,5 +152,18 @@ public class PublicMethod {
 
     public static void send(DatagramSocket socket, byte[] sendBytes) throws IOException { //server端重载send方法，其中address和port已获得
         send(socket, sendBytes, sendAddress, sendPort);
+    }
+
+    static void recvByteMethod(FileOutputStream fileOutputStream, DatagramSocket socket) throws IOException {
+        byte[] recvBytes;
+        while (true) { //使其一直处于接收状态
+            recvBytes = receive(socket);
+            if (recvBytes.length != 0) {
+                System.out.println(recvBytes.length);
+                fileOutputStream.write(recvBytes);
+                break;
+            }
+        }
+        System.out.println("receive succeed");
     }
 }
